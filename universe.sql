@@ -87,7 +87,8 @@ CREATE TABLE public.galaxy (
     name character varying(50) NOT NULL,
     description text,
     age_in_millions_of_years integer,
-    date_of_discovery date
+    date_of_discovery date,
+    is_elliptical boolean
 );
 
 
@@ -275,12 +276,12 @@ INSERT INTO public.constellation VALUES (3, 'Canis Major', NULL);
 -- Data for Name: galaxy; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
-INSERT INTO public.galaxy VALUES (1, 'Milky Way', NULL, NULL, NULL);
-INSERT INTO public.galaxy VALUES (2, 'Andromeda', NULL, NULL, NULL);
-INSERT INTO public.galaxy VALUES (3, 'Black Eye', NULL, NULL, NULL);
-INSERT INTO public.galaxy VALUES (4, 'Butterfly', NULL, NULL, NULL);
-INSERT INTO public.galaxy VALUES (5, 'Comet', NULL, NULL, NULL);
-INSERT INTO public.galaxy VALUES (6, 'Eye of Sauron', NULL, NULL, NULL);
+INSERT INTO public.galaxy VALUES (1, 'Milky Way', NULL, NULL, NULL, NULL);
+INSERT INTO public.galaxy VALUES (2, 'Andromeda', NULL, NULL, NULL, NULL);
+INSERT INTO public.galaxy VALUES (3, 'Black Eye', NULL, NULL, NULL, NULL);
+INSERT INTO public.galaxy VALUES (4, 'Butterfly', NULL, NULL, NULL, NULL);
+INSERT INTO public.galaxy VALUES (5, 'Comet', NULL, NULL, NULL, NULL);
+INSERT INTO public.galaxy VALUES (6, 'Eye of Sauron', NULL, NULL, NULL, NULL);
 
 
 --
@@ -375,11 +376,35 @@ SELECT pg_catalog.setval('public.star_star_id_seq', 6, true);
 
 
 --
+-- Name: constellation constellation_name_unique; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.constellation
+    ADD CONSTRAINT constellation_name_unique UNIQUE (name);
+
+
+--
+-- Name: constellation constellation_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.constellation
+    ADD CONSTRAINT constellation_pkey PRIMARY KEY (constellation_id);
+
+
+--
 -- Name: galaxy galaxy_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.galaxy
     ADD CONSTRAINT galaxy_pkey PRIMARY KEY (galaxy_id);
+
+
+--
+-- Name: moon moon_name_unique; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.moon
+    ADD CONSTRAINT moon_name_unique UNIQUE (name);
 
 
 --
@@ -391,11 +416,35 @@ ALTER TABLE ONLY public.moon
 
 
 --
+-- Name: galaxy name_unique; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.galaxy
+    ADD CONSTRAINT name_unique UNIQUE (name);
+
+
+--
+-- Name: planet planet_name_unique; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet
+    ADD CONSTRAINT planet_name_unique UNIQUE (name);
+
+
+--
 -- Name: planet planet_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.planet
     ADD CONSTRAINT planet_pkey PRIMARY KEY (planet_id);
+
+
+--
+-- Name: star star_name_unique; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.star
+    ADD CONSTRAINT star_name_unique UNIQUE (name);
 
 
 --
